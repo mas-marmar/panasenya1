@@ -16,12 +16,50 @@ app.get('/client', async (req, res) => {
   res.json(data)
  
 })
+app.get('/orders', async (req, res) => {
+  const {data, error} = await supabase
+  .from('orders')
+  .select ()
+  res.json(data)
+ 
+})
+
+app.get('/relative', async (req, res) => {
+  const {data, error} = await supabase
+  .from('relative')
+  .select ()
+  res.json(data)
+ 
+})
+
+app.get('/service', async (req, res) => {
+  const {data, error} = await supabase
+  .from('service')
+  .select ()
+  res.json(data)
+ 
+})
+
+app.get('/staff', async (req, res) => {
+  const {data, error} = await supabase
+  .from('staff')
+  .select ()
+  res.json(data)
+ 
+})
+
 app.post('/client', (req, res) => {
   res.send('изменение студентов')
 })
 
-app.delete('/client', (req, res) => {
-  res.send('удаление студентов')
+app.delete('/client/:id', async (req, res) => {
+  const {data, error} = await supabase
+  .from('client')
+  .delete ()
+  .eq('id', Number(req.params.id))
+
+  res.json(req.params.id)
+ 
 })
 
 app.put('/client', (req, res) => {
